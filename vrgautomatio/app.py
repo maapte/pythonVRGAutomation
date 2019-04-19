@@ -148,7 +148,7 @@ class AppVRG:
                         row=r + 11, column=c).value = req_data['forms'][parent]['steps'][child]['pageReferrer']
                 if 'pageHierarchy' in req_data['forms'][parent]['steps'][child]:
                     ws.cell(
-                        row=r + 12, column=c).value = req_data['forms'][parent]['steps'][child]['pageHierarchy']
+                        row=r + 12, column=c).value = str(req_data['forms'][parent]['steps'][child]['pageHierarchy'])
                 if 'pageLanguage' in req_data['forms'][parent]['steps'][child]:
                     ws.cell(
                         row=r + 13, column=c).value = req_data['forms'][parent]['steps'][child]['pageLanguage']
@@ -1000,7 +1000,7 @@ class AppVRG:
                 ws1.cell(row = r , column= c + 2).alignment = openpyxl.styles.Alignment(horizontal='center',vertical='center',wrapText=True)
                 ws1.cell(row=r, column=c + 2).font = openpyxl.styles.Font(bold=True)
                 ws1.cell(row = r , column= c + 2).border = border
-                
+
                 ws1.cell(row=r, column=c + 4).value = e
                 ws1.cell(row = r , column= c+4).alignment = openpyxl.styles.Alignment(horizontal='left',vertical='top',wrapText=True)
                 ws1.cell(row = r , column= c + 4).border = border
