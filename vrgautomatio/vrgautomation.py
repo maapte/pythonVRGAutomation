@@ -88,7 +88,10 @@ class Ui_c(object):
 
             if self.yesLoginSteps.isChecked() or self.bothLoginSteps.isChecked():
                 stepsObj.set_UserId("{dynamic}")
-                stepsObj.set_UserAuthState("authenticated")
+                if self.yesLoginSteps.isChecked():
+                    stepsObj.set_UserAuthState("authenticated")
+                elif self.bothLoginSteps.isChecked():
+                    stepsObj.set_UserAuthState("non-authenticated")
                 stepsObj.set_UserType("{dynamic}")
             if self.yesErrorSteps.isChecked():
                 stepsObj.eventError = "true"
@@ -115,9 +118,9 @@ class Ui_c(object):
             stepsObj.set_ToTransaction(self.lineEdit_13.text())
             stepsObj.isExternal =  str(self.isExternalCheckbox.isChecked())
 
-            stepsObj.set_formView(str(self.formView.isChecked()))
-            stepsObj.set_formQualify(str(self.formQualify.isChecked()))
-            stepsObj.set_formsubmit(str(self.formSubmit.isChecked()))
+            stepsObj.set_formView(str(self.formView.isChecked()).lower())
+            stepsObj.set_formQualify(str(self.formQualify.isChecked()).lower())
+            stepsObj.set_formsubmit(str(self.formSubmit.isChecked()).lower())
             stepsObj.set_formSteps('true')
 
             stepsObj.set_productId(str(self.productId.text()).lower().replace(" ","-"))
@@ -139,7 +142,10 @@ class Ui_c(object):
 
             if self.yesLoginSteps.isChecked() or self.bothLoginSteps.isChecked():
                 stepsObj.set_UserId("{dynamic}")
-                stepsObj.set_UserAuthState("authenticated")
+                if self.yesLoginSteps.isChecked():
+                    stepsObj.set_UserAuthState("authenticated")
+                elif self.bothLoginSteps.isChecked():
+                    stepsObj.set_UserAuthState("non-authenticated")
                 stepsObj.set_UserType("{dynamic}")
             if self.yesErrorSteps.isChecked():
                 stepsObj.eventError = "true"
@@ -164,9 +170,9 @@ class Ui_c(object):
             stepsObj.set_ToTransaction(self.lineEdit_13.text())
             stepsObj.isExternal =  str(self.isExternalCheckbox.isChecked())
 
-            stepsObj.set_formView(str(self.formView.isChecked()))
-            stepsObj.set_formQualify(str(self.formQualify.isChecked()))
-            stepsObj.set_formsubmit(str(self.formSubmit.isChecked()))
+            stepsObj.set_formView(str(self.formView.isChecked()).lower())
+            stepsObj.set_formQualify(str(self.formQualify.isChecked()).lower())
+            stepsObj.set_formsubmit(str(self.formSubmit.isChecked()).lower())
             stepsObj.set_formSteps('true')
 
             stepsObj.set_productId(str(self.productId.text()).lower().replace(" ","-"))
