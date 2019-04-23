@@ -15,11 +15,11 @@ class AppVRG:
         now = date.today()
         full = str(now.month) + "/" + str(now.day) + "/" + str(now.year)
         wb = openpyxl.Workbook()
-        wb = load_workbook('New_VRG_template.xlsx')
+        wb = load_workbook('New_VRG_template5.xlsx')
 
         wb.template = True
         ws = wb.active
-        ws.cell(row=6, column=1).value = 'Last Modified:' + full
+        ws.cell(row=6, column=2).value = 'Last Modified:' + full
         ws.cell(row=6, column=4).value = str(
             ws.cell(row=6, column=4).value) + str(req_data['userName']).title()
         ws.cell(row=6, column=4).alignment = openpyxl.styles.Alignment(
@@ -114,8 +114,8 @@ class AppVRG:
             r = 8
             for child in range(0, len(req_data['forms'][parent]['steps'])):
                 if 'pageName' in req_data['forms'][parent]['steps'][child]:
-                    ws.cell(row=8, column=c).value = str(
-                        req_data['forms'][parent]['steps'][child]['stepName']).upper()
+                    ws.cell(row=8, column=c).value = str(req_data['forms'][parent]['formName']).upper().replace(" ","-")+"|"+str(
+                        req_data['forms'][parent]['steps'][child]['stepName']).upper().replace(" ","-")
                     ws.cell(row = 8 , column= c).alignment = \
                     openpyxl.styles.Alignment(horizontal='center',vertical='center',wrapText=True)
                 if 'pageView' in req_data['forms'][parent]['steps'][child]:
