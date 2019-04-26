@@ -58,9 +58,7 @@ class AppVRG:
             if 'pagePath' in req_data['pages'][i]:
                 ws.cell(
                     row=r + 7, column=c).value = req_data['pages'][i]['pagePath']
-            #if 'pageName' in req_data['pages'][i]:
-            #    ws.cell(row=r + 8, column=c).value = req_data['sitebrand'] + "." + req_data['siteName'] + "." + \
-            #                                         req_data['pages'][i]['pageName']
+
             if 'pageName' in req_data['pages'][i]:
                 ws.cell(row=r + 8, column=c).value = req_data['pages'][i]['pageName']
 
@@ -266,23 +264,29 @@ class AppVRG:
                     ws.cell(
                         row=r + 93, column=c).value = req_data['forms'][parent]['steps'][child]['adjudication']
                 if 'productRecommendation' in req_data['forms'][parent]['steps'][child]:
-                    ws.cell(
-                        row=r + 79, column=c).value = req_data['forms'][parent]['steps'][child]['productRecommendation']
+                    if (req_data['forms'][parent]['steps'][child]['productRecommendation'] == 'true'):
+                        ws.cell(
+                            row=r + 79, column=c).value = req_data['forms'][parent]['steps'][child]['productRecommendation']
                 if 'isPaperless' in req_data['forms'][parent]['steps'][child]:
-                    ws.cell(
-                        row=r + 96, column=c).value = req_data['forms'][parent]['steps'][child]['isPaperless']
+                    if (req_data['forms'][parent]['steps'][child]['isPaperless'] == 'true'):
+                        ws.cell(
+                            row=r + 96, column=c).value = req_data['forms'][parent]['steps'][child]['isPaperless']
                 if 'summary' in req_data['forms'][parent]['steps'][child]:
-                    ws.cell(
-                        row=r + 80, column=c).value = req_data['forms'][parent]['steps'][child]['summary']
+                    if (req_data['forms'][parent]['steps'][child]['summary'] == 'true'):
+                        ws.cell(
+                            row=r + 80, column=c).value = req_data['forms'][parent]['steps'][child]['summary']
                 if 'confirmation' in req_data['forms'][parent]['steps'][child]:
-                    ws.cell(
-                        row=r + 83, column=c).value = req_data['forms'][parent]['steps'][child]['confirmation']
+                     if (req_data['forms'][parent]['steps'][child]['confirmation'] == 'true'):
+                        ws.cell(
+                            row=r + 83, column=c).value = req_data['forms'][parent]['steps'][child]['confirmation']
                 if 'termsandCondition' in req_data['forms'][parent]['steps'][child]:
-                    ws.cell(
-                        row=r + 82, column=c).value = req_data['forms'][parent]['steps'][child]['termsandCondition']
+                     if (req_data['forms'][parent]['steps'][child]['termsandCondition'] == 'true'):
+                        ws.cell(
+                            row=r + 82, column=c).value = req_data['forms'][parent]['steps'][child]['termsandCondition']
                 if 'personalDetails' in req_data['forms'][parent]['steps'][child]:
-                    ws.cell(
-                        row=r + 78, column=c).value = req_data['forms'][parent]['steps'][child]['personalDetails']
+                    if (req_data['forms'][parent]['steps'][child]['personalDetails'] == 'true'):
+                        ws.cell(
+                            row=r + 78, column=c).value = req_data['forms'][parent]['steps'][child]['personalDetails']
 
 
                 # Error Information in VRG
@@ -514,6 +518,37 @@ class AppVRG:
                         [child]['stepName']).lower().replace(" ","-") + '']['product'][0]['paperless'] = \
                             str(req_data['forms'][parent]['steps'][child]['isPaperless']).lower()
 
+                    if req_data['forms'][parent]['isTransactionExist']:
+                        forms['state_' + str(req_data['forms'][parent]['formName']).lower().replace(" ","-")+"-"+str(req_data['forms'][parent]['steps']
+                        [child]['stepName']).lower().replace(" ","-") + '']['transaction'] = [{}]
+
+                        forms['state_' + str(req_data['forms'][parent]['formName']).lower().replace(" ","-")+"-"+str(req_data['forms'][parent]['steps']
+                        [child]['stepName']).lower().replace(" ","-") + '']['transaction'][0]['id'] = \
+                           str(req_data['forms'][parent]['steps'][child]['transactionId']).lower().replace(" ","-")
+
+                        forms['state_' + str(req_data['forms'][parent]['formName']).lower().replace(" ","-")+"-"+str(req_data['forms'][parent]['steps']
+                        [child]['stepName']).lower().replace(" ","-") + '']['transaction'][0]['items'] = [{}]
+
+                        forms['state_' + str(req_data['forms'][parent]['formName']).lower().replace(" ","-")+"-"+str(req_data['forms'][parent]['steps']
+                        [child]['stepName']).lower().replace(" ","-") + '']['transaction'][0]['items'][0]['from'] = \
+                            str(req_data['forms'][parent]['steps'][child]['fromtransaction']).lower().replace(" ","-")
+
+                        forms['state_' + str(req_data['forms'][parent]['formName']).lower().replace(" ","-")+"-"+str(req_data['forms'][parent]['steps']
+                        [child]['stepName']).lower().replace(" ","-") + '']['transaction'][0]['items'][0]['to'] = \
+                            str(req_data['forms'][parent]['steps'][child]['totransaction']).lower().replace(" ","-")
+
+                        forms['state_' + str(req_data['forms'][parent]['formName']).lower().replace(" ","-")+"-"+str(req_data['forms'][parent]['steps']
+                        [child]['stepName']).lower().replace(" ","-") + '']['transaction'][0]['items'][0]['amount'] = \
+                            str(req_data['forms'][parent]['steps'][child]['transactionamount']).lower().replace(" ","-")
+
+                        forms['state_' + str(req_data['forms'][parent]['formName']).lower().replace(" ","-")+"-"+str(req_data['forms'][parent]['steps']
+                        [child]['stepName']).lower().replace(" ","-") + '']['transaction'][0]['items'][0]['unit'] = \
+                            str(req_data['forms'][parent]['steps'][child]['transactionUnit']).lower().replace(" ","-")
+
+                        forms['state_' + str(req_data['forms'][parent]['formName']).lower().replace(" ","-")+"-"+str(req_data['forms'][parent]['steps']
+                        [child]['stepName']).lower().replace(" ","-") + '']['transaction'][0]['items'][0]['isExternal'] = \
+                            str(req_data['forms'][parent]['steps'][child]['isExternal']).lower().replace(" ","-")
+
                     # Page Object Created in Form JSON Object
                     forms['state_' + str(req_data['forms'][parent]['formName']).lower().replace(" ","-")+"-"+str(req_data['forms'][parent]['steps']
                         [child]['stepName']).lower().replace(" ","-") + '']['page'] = {}
@@ -671,7 +706,7 @@ class AppVRG:
                     req_data['pages'][i]['userAuthState']) + ' : ' + str(
                     req_data['pages'][i][
                         'userType']) + '}' + '    // Authentication of User and User Type' + '\n eVar20: ' + str(
-                    req_data['pages'][i]['userId']) + '    // User ID' + '\n \n' + event + '\t' + comment
+                    req_data['pages'][i]['userId']) + '    // User ID'
                 ws1.cell(row=r, column=c + 7).value = str(dct)
                 ws1.cell(row=r, column=c + 7).alignment = alignment
                 ws1.cell(row=r, column=c + 8).value = req_data['userName']
